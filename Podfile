@@ -6,6 +6,6 @@ xcodeproj 'bdd-presentation'
 use_frameworks!
 
 target 'bdd-presentation-specs' do
-  pod 'Quick', '~> 0.8.0'
-  pod 'Nimble', '3.1.0'
+  pod 'Quick'
+  pod 'Nimble'
 end

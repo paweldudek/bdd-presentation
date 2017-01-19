@@ -10,5 +10,5 @@ import Foundation
 import UIKit
 
 protocol PhotoUploader {    
-    func uploadPhoto(photo:UIImage, completion: (success: Bool)->Void)
+    func upload(photo:UIImage, completion: (_ success: Bool)->Void)
 }

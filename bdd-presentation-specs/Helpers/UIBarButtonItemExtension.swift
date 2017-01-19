@@ -15,7 +15,7 @@ extension UIBarButtonItem {
         let action = self.action
         
         if let target = optionalTarget {
-            target.performSelector(action, withObject: self)
+            target.perform(action, with: self)
         }
         
     }

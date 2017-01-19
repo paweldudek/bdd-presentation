@@ -1,11 +1,3 @@
-//
-//  PhotoUploadViewControllerSpec.swift
-//  mobilization-2015
-//
-//  Created by Paweł Dudek on 16/10/15.
-//  Copyright © 2015 Paweł Dudek. All rights reserved.
-//
-
 import Foundation
 
 import Quick
@@ -15,9 +7,9 @@ import Nimble
 
 class FakePhotoUploader: PhotoUploader {
     
-    private(set) var photoUploadCalled: Bool = false
+    fileprivate(set) var photoUploadCalled: Bool = false
     
-    func uploadPhoto(photo: UIImage, completion: (success: Bool) -> Void) {
+    func upload(photo: UIImage, completion: (_ success: Bool) -> Void) {
         self.photoUploadCalled = true
     }
 }
@@ -35,9 +27,7 @@ class FakePhotoUploader: PhotoUploader {
 
 
 class PhotoUploadViewControllerSpec: QuickSpec {
-    
-    
-    
+
     
     override func spec() {
         
@@ -49,14 +39,15 @@ class PhotoUploadViewControllerSpec: QuickSpec {
             
             sut = PhotoUploadViewController(photoUploader: fakePhotoUploader)
         }
+        
+        afterEach {
+            sut = nil
+        }
 
         it("should have a title") {
             expect(sut.title).to(equal("Photo Upload"))
         }
 
-        afterEach {
-           sut = nil
-        }
 
         
         
@@ -77,14 +68,14 @@ class PhotoUploadViewControllerSpec: QuickSpec {
         
         describe("right bar button item") {
             
-            var rightBarButtonItem: UIBarButtonItem!
+            var rightBarButtonItem: UIBarButtonItem?
             
             beforeEach {
                 rightBarButtonItem = sut.navigationItem.rightBarButtonItem
             }
             
             it("should be a bar button item") {
-                expect(rightBarButtonItem).to(beAKindOf(UIBarButtonItem))
+                expect(rightBarButtonItem).toNot(beNil())
             }
             
             it("should have a target") {
@@ -92,7 +83,7 @@ class PhotoUploadViewControllerSpec: QuickSpec {
             }
             
             it("should have an action") {
-                expect(rightBarButtonItem?.action).to(equal(Selector("didTapRightBarButtonItem:")))
+                expect(rightBarButtonItem?.action).to(equal(#selector(PhotoUploadViewController.didTapRightBarButtonItem(_:))))
             }
         }
         
@@ -144,7 +135,7 @@ class PhotoUploadViewControllerSpec: QuickSpec {
             }
             
             it("should be a bar button item") {
-                expect(rightBarButtonItem).to(beAKindOf(UIBarButtonItem))
+                expect(rightBarButtonItem).toNot(beNil())
             }
             
             describe("when it is tapped") {
