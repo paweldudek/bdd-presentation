@@ -1,7 +1,7 @@
 platform :ios, '9.0'
 inhibit_all_warnings!
 
-xcodeproj 'bdd-presentation'
+project 'bdd-presentation'
 
 use_frameworks!
 

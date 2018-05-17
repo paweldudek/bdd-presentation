@@ -5,7 +5,7 @@ import Nimble
 
 @testable import bdd_presentation
 
-class FakePhotoUploader: PhotoUploader {
+class MockPhotoUploader: PhotoUploader {
     
     fileprivate(set) var photoUploadCalled: Bool = false
     
@@ -32,12 +32,12 @@ class PhotoUploadViewControllerSpec: QuickSpec {
     override func spec() {
         
         var sut: PhotoUploadViewController!
-        var fakePhotoUploader: FakePhotoUploader!
+        var mockPhotoUploader: MockPhotoUploader!
         
         beforeEach {
-            fakePhotoUploader = FakePhotoUploader()
+            mockPhotoUploader = MockPhotoUploader()
             
-            sut = PhotoUploadViewController(photoUploader: fakePhotoUploader)
+            sut = PhotoUploadViewController(photoUploader: mockPhotoUploader)
         }
         
         afterEach {
@@ -95,7 +95,7 @@ class PhotoUploadViewControllerSpec: QuickSpec {
             }
             
             it("should tell the photo uploader to upload photo") {
-                expect(fakePhotoUploader.photoUploadCalled).to(beTruthy())
+                expect(mockPhotoUploader.photoUploadCalled).to(beTruthy())
             }
         }
         
@@ -145,19 +145,9 @@ class PhotoUploadViewControllerSpec: QuickSpec {
                 }
                 
                 it("should tell the photo uploader to upload photo") {
-                    expect(fakePhotoUploader.photoUploadCalled).to(beTruthy())
+                    expect(mockPhotoUploader.photoUploadCalled).to(beTruthy())
                 }
             }
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }
